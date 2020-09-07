@@ -1,0 +1,16 @@
+/* 
+ *重写ElementUI轮播图指示器
+ */
+.el-carousel__button{
+  width: 6px;
+  height: 6px;
+  border-radius: 25px;
+}
+.el-card.is-always-shadow{
+  box-shadow: none;
+}
+.el-card{
+  border: none;
+  width: 84px;
+  position: relative;
+}
