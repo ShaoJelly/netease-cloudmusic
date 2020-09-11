@@ -44,6 +44,10 @@ export default {
     probeType: {
       type: Number,
     },
+    click: {
+      type: Boolean,
+      default: true,
+    },
   },
   computed: {
     isShow() {
@@ -76,6 +80,7 @@ export default {
       this.$nextTick(() => {
         if (!this.scroll) {
           this.scroll = new BScroll(this.$refs.wrapper, {
+            click: this.click,
             scrollX: this.scrollX,
             scrollY: this.scrollY,
             probeType: this.probeType,
@@ -85,10 +90,10 @@ export default {
           this.scroll.refresh();
         }
         if (this.probeType > 0) {
-          this._scroll()
+          this._scroll();
         }
         if (this.pullUpLoad) {
-          this._pullingUp()
+          this._pullingUp();
         }
       });
     },

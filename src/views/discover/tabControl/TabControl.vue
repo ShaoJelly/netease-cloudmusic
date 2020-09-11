@@ -1,7 +1,7 @@
 <template>
   <div class="tab-control">
     <el-row>
-      <el-col v-for="(item, index) in tab" :key="index" :offset="index > 0 ? 1 : 0">
+      <el-col @click="click" v-for="(item, index) in tab" :key="index" :offset="index > 0 ? 1 : 0">
         <img :src="item.img" class="image">
         <div class="title">
           <span style="width:100%">{{item.title}}</span>
@@ -59,6 +59,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    click(){
+      console.log("111");
+    }
   },
 };
 </script>
