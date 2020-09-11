@@ -19,9 +19,6 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-.up b {
-  font-size: 15px;
-}
 .up button {
   border-radius: 25px;
   border: 1px solid #dddddd;

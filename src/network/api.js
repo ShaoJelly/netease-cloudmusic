@@ -5,7 +5,7 @@ export const getBanners = () => request({
   url: '/banner?type=0'
 })
 //发现-推荐歌单
-export const getRecommendPlaylist = () => request({
+export const getPopularPlaylist = () => request({
   url: '/personalized'
 })
 //发现-新歌

@@ -1,7 +1,7 @@
 <template>
   <div class="swiper">
     <el-carousel :interval="1000" height="150px">
-      <el-carousel-item v-for="(item,index) in items" :key="index">
+      <el-carousel-item v-for="(item,index) in banners" :key="index">
         <el-image :src="item"></el-image>
       </el-carousel-item>
     </el-carousel>
@@ -15,7 +15,7 @@ export default {
     return {};
   },
   props: {
-    items: {
+    banners: {
       type: Array,
     },
   },

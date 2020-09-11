@@ -1,12 +1,10 @@
 <template>
-  <div class="search">
-    <div :style="{zIndex:$store.state.zIndex}" class="transitions">
-      <transition name="fade">
-        <div v-show="$store.state.show" class="transition-box">
-          <slot></slot>
-        </div>
-      </transition>
-    </div>
+  <div class="search" :style="{zIndex:$store.state.zIndex}">
+    <transition name="fade">
+      <div v-show="$store.state.show" class="search-box">
+        <slot></slot>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -20,7 +18,7 @@ export default {
 </script>
 
 <style scoped>
-.transitions {
+.search {
   position: fixed;
   top: 44px;
   left: 0;
@@ -28,9 +26,10 @@ export default {
   bottom: 49px;
   background-color: white;
 }
-.transition-box {
+.search-box {
   margin: auto 8px;
   height: 100%;
+  background-color: white;
 }
 .fade-enter-active,
 .fade-leave-active {
