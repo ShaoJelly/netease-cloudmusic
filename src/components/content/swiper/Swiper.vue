@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "",
+  name: "Swiper",
   data() {
     return {
       arrow: "never",

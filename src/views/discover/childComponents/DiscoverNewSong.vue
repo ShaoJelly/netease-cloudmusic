@@ -15,7 +15,7 @@
         <song-out-item ref="songOutItem" v-for="(song_item,index) in songOutItem" :key="index">
           <song-item class="song-item" v-for="(item,inde) in song_item" :key="inde">
             <div class="left">
-              <img :src="item.picUrl" @load="scrollRefresh" />
+              <img v-lazy="item.picUrl" :key="item.id" @load="scrollRefresh" />
             </div>
             <div class="center">
               <span class="song_name">{{item.name}}</span>

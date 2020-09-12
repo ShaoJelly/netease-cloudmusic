@@ -14,7 +14,7 @@
       <down class="down">
         <playlist-item v-for="(item,index) in popularPlaylist" :key="index">
           <el-card :body-style="getBodyStyle()">
-            <img class="icon_pic" :src="item.picUrl">
+            <img class="icon_pic" v-lazy="item.picUrl" :key="index">
             <span class="text_name">{{item.name}}</span>
             <div class="play">
               <span class="text_playCount">{{item.playCount | transPlayCount}}</span>

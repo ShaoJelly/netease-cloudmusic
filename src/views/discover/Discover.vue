@@ -5,7 +5,11 @@
       <discover-scroll
         class="discover-scroll"
         ref="discoverScroll"
+        :pullUpLoad="pullUpLoad"
+        :pullDownRefresh="pullDownRefresh"
+        @pullingDownRefresh="pullingDownRefresh"
       >
+        <loading v-show="isShow"></loading>
         <discover-swiper :banners="banners"></discover-swiper>
         <discover-tab-control></discover-tab-control>
         <discover-popular-playlist :popularPlaylist="popularPlaylist"></discover-popular-playlist>
@@ -25,6 +29,7 @@ import DiscoverTabControl from "./childComponents/DiscoverTabControl";
 
 import DiscoverSwiper from "components/content/swiper/Swiper";
 import DiscoverScroll from "components/content/scroll/Scroll";
+import Loading from "components/common/loading/Loading";
 
 import * as api from "network/api";
 
@@ -37,6 +42,9 @@ export default {
       newSong: [],
       hotDetail: [],
       popularPlaylist: [],
+      pullUpLoad: true,
+      pullDownRefresh: true,
+      isShow: false,
     };
   },
   components: {
@@ -47,11 +55,13 @@ export default {
     DiscoverPopularPlaylist,
     DiscoverNewSong,
     DiscoverSearch,
+    Loading,
   },
   methods: {
     //获取轮播图
     _getBanners() {
       api.getBanners().then((res) => {
+        this.banners = [];
         for (let i of res.data.banners) {
           this.banners.push(i.imageUrl);
         }
@@ -78,6 +88,7 @@ export default {
     //获取热搜榜
     _getHotDetail() {
       api.getHotDetail().then((res) => {
+        this.hotDetail = [];
         let arr = [];
         let data = res.data.data;
         for (let i in data) {
@@ -91,12 +102,28 @@ export default {
       this.$nextTick(() => {
         this.$refs.discoverSearch.refresh();
       });
-      // this.$refs.discoverSearch.$refs.scrollSearch.scroll.refresh()
     },
     //刷新获取到的高度
     scrollRefresh() {
       this.$refs.discoverScroll.scroll.refresh();
       this.$refs.discoverSearch.scrollRefresh();
+    },
+    //下拉刷新
+    pullingDownRefresh() {
+      // this.banners = [];
+      // this.newSong = [];
+      // this.hotDetail = [];
+      // this.popularPlaylist = [];
+      this.isShow = true
+      setTimeout(() => {
+        this.isShow = false
+        this.$refs.discoverScroll._finishPullDown();
+        this._getBanners();
+        this._getPopularPlaylist();
+        this._getNewSong();
+        this._getPlaceholder();
+        this._getHotDetail();
+      }, 2000);
     },
   },
   created() {

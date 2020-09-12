@@ -8,6 +8,7 @@
 
 <script>
 import BScroll from "better-scroll";
+import {Toast} from 'mint-ui'
 
 export default {
   name: "Scroll",
@@ -38,6 +39,10 @@ export default {
       default: true,
     },
     pullUpLoad: {
+      type: Boolean,
+      default: false,
+    },
+    pullDownRefresh: {
       type: Boolean,
       default: false,
     },
@@ -85,6 +90,10 @@ export default {
             scrollY: this.scrollY,
             probeType: this.probeType,
             pullUpLoad: this.pullUpLoad,
+            pullDownRefresh: {
+              threshold: 20, // 下拉距离超过30px触发pullingDown事件
+              stop: 10, // 回弹停留在距离顶部20px的位置
+            },
           });
         } else {
           this.scroll.refresh();
@@ -95,6 +104,9 @@ export default {
         if (this.pullUpLoad) {
           this._pullingUp();
         }
+        if (this.pullDownRefresh) {
+          this._pullingDown();
+        }
       });
     },
     _scroll() {
@@ -104,10 +116,19 @@ export default {
     },
     _pullingUp() {
       this.scroll.on("pullingUp", () => {
-        console.log("上拉加载刷新");
+        Toast("上拉加载")
         //手动结束上拉加载
         this.scroll.finishPullUp();
       });
+    },
+    _pullingDown() {
+      this.scroll.on("pullingDown", () => {
+        this.$emit("pullingDownRefresh");
+        this.scroll.refresh();
+      });
+    },
+    _finishPullDown() {
+      this.scroll.finishPullDown(); // 事情做完，需要调用此方法告诉 better-scroll 数据已加载，否则下拉事件只会执行一次
     },
   },
 };
