@@ -1,8 +1,13 @@
 <template>
   <div class="tab-control">
     <el-row>
-      <el-col @click="click" v-for="(item, index) in tab" :key="index" :offset="index > 0 ? 1 : 0">
-        <img :src="item.img" class="image">
+      <el-col
+        @click.native="click(item.url)"
+        v-for="(item, index) in tab"
+        :key="index"
+        :offset="index > 0 ? 1 : 0"
+      >
+        <img :src="item.img" class="image" />
         <div class="title">
           <span style="width:100%">{{item.title}}</span>
         </div>
@@ -12,10 +17,15 @@
 </template>
 
 <script>
+import { Toast } from "mint-ui";
+import { debouce } from "common/utils";
+
 export default {
   name: "TabControl",
   data() {
     return {
+      timer: null,
+      url:null,
       tab: [
         {
           title: "每日推荐",
@@ -24,10 +34,12 @@ export default {
         {
           title: "歌单",
           img: require("assets/img/discover/tabControl/song_sheet.png"),
+          url: "/discover/playlist",
         },
         {
           title: "排行榜",
           img: require("assets/img/discover/tabControl/ranking_list.png"),
+          url:'/discover/toplist'
         },
         {
           title: "电台",
@@ -61,9 +73,17 @@ export default {
     };
   },
   methods: {
-    click(){
-      console.log("111");
-    }
+    click(url) {
+      if (url == null) {
+        Toast("暂未开发");
+      } else {
+        this.url = url
+        this.timer = debouce(this.push, 100, this.timer);
+      }
+    },
+    push() {
+      this.$router.push(this.url);
+    },
   },
 };
 </script>

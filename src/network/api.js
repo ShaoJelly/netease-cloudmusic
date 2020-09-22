@@ -12,7 +12,6 @@ export const getPopularPlaylist = () => request({
 export const getNewSong = () => request({
   url: '/personalized/newsong'
 })
-
 //搜索框placeholder
 export const getPlaceholder = () => request({
   url: '/search/default'
@@ -21,18 +20,26 @@ export const getPlaceholder = () => request({
 export const getHotDetail = () => request({
   url: '/search/hot/detail'
 })       
-//                    /search/hot
+//歌单——推荐
+export const getPlaylist = () => request({
+  url: '/top/playlist'
+})   
+//排行榜
+export const getToplist = () => request({
+  url: '/toplist/detail'
+}) 
 
-//歌单——推荐歌单    /top/playlist
 //歌单——精品      /top/playlist/highquality
 //歌单——所有歌单    /playlist/catlist
 //歌单——所有歌单（火）    /playlist/hot
+//上拉更多       /top/playlist?limit=100
+//推荐歌单      /playlist/detail?id=${id}
 
 //发现——新碟——本周新碟    /top/album
 
 //排行榜——mv排行榜    /top/mv
 //排行榜——歌手榜     /toplist/artist
-//    /top/artists
+//  热门歌手    /top/artists
 
 //电台——轮播图      /dj/banner
 //电台——电台分类       /dj/catelist    /dj/category/excludehot
@@ -43,15 +50,17 @@ export const getHotDetail = () => request({
 //电台——电台排行——主播榜——新人榜     /dj/toplist/newcomer
 //电台——电台排行——主播榜——最热主播      /dj/toplist/popular
 //电台——电台排行——电台榜——付费精品榜    /dj/toplist/pay
+// 获取最热节目         /dj/program/toplist
 //           /dj/hot
 //      /dj/today/perfered
-//         /dj/toplist
+// 获取电台榜         /dj/toplist
+// 获取节目榜24小时榜    /dj/program/toplist/hours
 
 //视频——mv——MV精选  /personalized/mv
 //视频——mv——更多  /mv/first
 //视频——mv——分类——全部        /mv/all
 //       /mv/exclusive/rcmd
-
+// 获取视频标签导航     /video/group/list
 
 
 //数字专辑——最新上架  /album/list
@@ -76,11 +85,12 @@ export const getHotDetail = () => request({
 
 //                 /top/song
 
+//                    /search/hot
 
+// 发现页私人FM     /personal_fm
 
+//搜索歌曲    /search?keywords=${word}
 // 排行榜
-export const getTopList = () => $http.get('/toplist')
+//export const getTopList = () => $http.get('/toplist')
 // 排行榜 -> 飙升榜idx = 3
-export const getTopListIdx = idx => $http.get(`/top/list?idx=${idx}`)
-// * 所有榜单内容摘要
-export const getTopListDetail = () => $http.get(`/toplist/detail`)
+//export const getTopListIdx = idx => $http.get(`/top/list?idx=${idx}`)

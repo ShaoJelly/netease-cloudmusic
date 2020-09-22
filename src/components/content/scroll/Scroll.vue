@@ -8,7 +8,7 @@
 
 <script>
 import BScroll from "better-scroll";
-import {Toast} from 'mint-ui'
+import { Toast } from "mint-ui";
 
 export default {
   name: "Scroll",
@@ -116,7 +116,7 @@ export default {
     },
     _pullingUp() {
       this.scroll.on("pullingUp", () => {
-        Toast("上拉加载")
+        Toast("上拉加载");
         //手动结束上拉加载
         this.scroll.finishPullUp();
       });

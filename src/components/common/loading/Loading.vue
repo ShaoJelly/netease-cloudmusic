@@ -1,6 +1,6 @@
 <template>
   <div class="loading">
-    <span class="loading-text">加载中</span>
+    <div class="el-icon-loading"></div>
   </div>
 </template>
 
@@ -17,9 +17,5 @@ export default {
 .loading {
   width: 100%;
   text-align: center;
-  height: 20px;
-}
-.loading-text{
-  font-size: 13px;
 }
 </style>

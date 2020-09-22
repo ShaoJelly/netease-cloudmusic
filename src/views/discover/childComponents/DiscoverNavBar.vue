@@ -1,6 +1,6 @@
 <template>
   <nav-bar :span="span">
-    <img slot="left" class="left-slot" src="~assets/img/discover/navBar/micphone.png" />
+    <div slot="left" class="el-icon-microphone"></div>
     <input
       style="outline:medium;"
       slot="center"
@@ -70,5 +70,8 @@ export default {
   background-color: #dddddd54;
   text-align: center;
   padding: 0;
+}
+.el-icon-microphone{
+  font-size: 22px;
 }
 </style>

@@ -1,8 +1,13 @@
 <template>
   <div class="discover">
-    <div class="discover-padding">
+    <div class="discover-margin">
+      <router-view></router-view>
       <discover-nav-bar :placeholder="placeholder"></discover-nav-bar>
       <discover-scroll
+        v-loading="loading"
+        element-loading-spinner="el-icon-loading"
+        element-loading-background="white"
+        element-loading-text="加载中"
         class="discover-scroll"
         ref="discoverScroll"
         :pullUpLoad="pullUpLoad"
@@ -26,8 +31,8 @@ import DiscoverPopularPlaylist from "./childComponents/DiscoverPopularPlaylist";
 import DiscoverNewSong from "./childComponents/DiscoverNewSong";
 import DiscoverSearch from "./childComponents/DiscoverSearch";
 import DiscoverTabControl from "./childComponents/DiscoverTabControl";
+import DiscoverSwiper from "./childComponents/DiscoverSwiper";
 
-import DiscoverSwiper from "components/content/swiper/Swiper";
 import DiscoverScroll from "components/content/scroll/Scroll";
 import Loading from "components/common/loading/Loading";
 
@@ -45,6 +50,7 @@ export default {
       pullUpLoad: true,
       pullDownRefresh: true,
       isShow: false,
+      loading: true,
     };
   },
   components: {
@@ -65,6 +71,7 @@ export default {
         for (let i of res.data.banners) {
           this.banners.push(i.imageUrl);
         }
+        this.cancelLoading();
       });
     },
     //获取推荐歌单
@@ -114,9 +121,9 @@ export default {
       // this.newSong = [];
       // this.hotDetail = [];
       // this.popularPlaylist = [];
-      this.isShow = true
+      this.isShow = true;
       setTimeout(() => {
-        this.isShow = false
+        this.isShow = false;
         this.$refs.discoverScroll._finishPullDown();
         this._getBanners();
         this._getPopularPlaylist();
@@ -124,6 +131,10 @@ export default {
         this._getPlaceholder();
         this._getHotDetail();
       }, 2000);
+    },
+    //取消加载
+    cancelLoading() {
+      this.loading = false;
     },
   },
   created() {
@@ -144,7 +155,7 @@ export default {
   height: 100vh;
   width: 100vw;
 }
-.discover-padding {
+.discover-margin {
   margin: auto 8px;
   height: 100%;
 }
