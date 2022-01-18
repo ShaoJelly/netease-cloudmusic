@@ -1,5 +1,5 @@
 <template>
-  <shell>
+  <shell class="playlist">
     <playlist-nav-bar></playlist-nav-bar>
     <playlist-tab-control></playlist-tab-control>
     <scroll
@@ -21,7 +21,7 @@ import PlaylistSwiper from "./childComponents/PlaylistSwiper";
 import PlaylistRecommend from "./childComponents/PlaylistRecommend";
 
 import Scroll from "components/content/scroll/Scroll";
-import Shell from "components/content/tabControl/Shell";
+import Shell from "components/content/shell/Shell";
 
 import * as api from "network/api";
 
@@ -71,6 +71,9 @@ export default {
 </script>
 
 <style scoped>
+.playlist{
+  z-index: 12;
+}
 .playlist-scroll {
   height: calc(100% - 44px - 28px);
 }

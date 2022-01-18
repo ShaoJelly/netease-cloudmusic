@@ -28,6 +28,15 @@ export const getPlaylist = () => request({
 export const getToplist = () => request({
   url: '/toplist/detail'
 }) 
+//电台——轮播图
+export const getDjBanners = () => request({
+  url: '/dj/banner'
+}) 
+//电台——电台分类
+export const getDjClassify = () => request({
+  url: '/dj/catelist'
+}) 
+
 
 //歌单——精品      /top/playlist/highquality
 //歌单——所有歌单    /playlist/catlist
@@ -41,7 +50,6 @@ export const getToplist = () => request({
 //排行榜——歌手榜     /toplist/artist
 //  热门歌手    /top/artists
 
-//电台——轮播图      /dj/banner
 //电台——电台分类       /dj/catelist    /dj/category/excludehot
 //电台——电台推荐     /dj/recommend
 //电台——电台分类推荐      /dj/category/recommend

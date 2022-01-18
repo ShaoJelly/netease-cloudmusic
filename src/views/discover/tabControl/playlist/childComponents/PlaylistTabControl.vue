@@ -6,7 +6,7 @@
       :scrollX="scrollX"
       :scrollY="scrollY"
     >
-      <tab-control :tab="tab"></tab-control>
+      <tab-control-one :tab="tab"></tab-control-one>
     </scroll>
     <div class="total">
       <div class="el-icon-menu"></div>
@@ -16,7 +16,7 @@
 
 <script>
 import Scroll from "components/content/scroll/Scroll";
-import TabControl from "components/content/tabControl/TabControl";
+import TabControlOne from "components/content/tabControl/TabControlOne";
 
 export default {
   name: "PlaylistTabControl",
@@ -29,7 +29,7 @@ export default {
     };
   },
   components: {
-    TabControl,
+    TabControlOne,
     Scroll,
   },
 };

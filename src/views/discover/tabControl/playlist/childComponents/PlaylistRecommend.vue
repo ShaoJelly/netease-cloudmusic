@@ -3,7 +3,7 @@
     <el-row v-for="(row,index) in cPlaylist" :key="index">
       <el-col :span="7" v-for="(col, inde) in row" :key="inde" :offset="inde > 0 ? 1 : 0">
         <el-card :body-style="{ padding: '0px' }">
-          <img :src="col.coverImgUrl" @load="scrollRefresh" />
+          <img v-lazy="col.coverImgUrl" @load="scrollRefresh" />
           <span>{{col.name}}</span>
           <div class="playCount">
             <img class="icon-play" src="~assets/img/discover/tabRecomend/play.png" />
@@ -65,7 +65,7 @@ span {
 .el-row {
   margin-top: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 .el-card {
   width: auto;

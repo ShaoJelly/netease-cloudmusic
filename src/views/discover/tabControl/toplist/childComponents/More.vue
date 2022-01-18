@@ -7,7 +7,7 @@
       <down slot="down">
         <toplist-row v-for="(row,index) in cMore" :key="index">
           <toplist-item-two v-for="(col,inde) in row" :key="inde">
-            <img @load="load" slot="top" :src="col.coverImgUrl" />
+            <img @load="load" slot="top" v-lazy="col.coverImgUrl" />
             <span slot="center">{{col.updateFrequency}}</span>
             <span slot="bottom">{{col.name}}</span>
           </toplist-item-two>

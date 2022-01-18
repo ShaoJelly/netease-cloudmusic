@@ -1,8 +1,13 @@
 <template>
   <swiper @click.native="changeArrow">
-    <el-carousel :interval="2000" height="150px" :arrow="arrow" :autoplay="autoplay">
-      <el-carousel-item v-for="(item,index) in banners" :key="index">
-        <el-image :src="item"></el-image>
+    <el-carousel
+      :interval="2000"
+      height="150px"
+      :arrow="arrow"
+      :autoplay="autoplay"
+    >
+      <el-carousel-item v-for="(item, index) in banners" :key="index">
+        <el-image :src="item.pic" @load="load" />
       </el-carousel-item>
     </el-carousel>
   </swiper>
@@ -11,13 +16,21 @@
 <script>
 import Swiper from "components/content/swiper/Swiper";
 
+import { debouce } from "common/utils";
+
 export default {
-  name: "DiscoverSwiper",
+  name: "DjSwiper",
   data() {
     return {
       arrow: "never",
       autoplay: true,
+      timer: null,
     };
+  },
+  props: {
+    banners: {
+      type: Array,
+    },
   },
   methods: {
     changeArrow() {
@@ -29,11 +42,12 @@ export default {
         this.autoplay = false;
       }
     },
-  },
-  props: {
-    banners: {
-      type: Array,
-    }
+    load() {
+      this.timer = debouce(this.setLoading, 100, this.timer);
+    },
+    setLoading() {
+      this.$emit("setLoading");
+    },
   },
   components: {
     Swiper,

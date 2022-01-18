@@ -1,8 +1,15 @@
 <template>
   <tab-recommend>
     <up slot="up">
-      <b slot="up-left">新歌</b>
-      <button style="outline:medium;" slot="up-right">更多新歌</button>
+      <div class="up-left" slot="up-left">
+        <b
+          :class="{padding_r:ind == 0,padding_l:ind == tab.length - 1,black:currentIndex == ind}"
+          v-for="(item, ind) in tab"
+          :key="ind"
+          @click="changeType(ind)"
+        >{{item}}</b>
+      </div>
+      <button style="outline:medium;" slot="up-right">{{bottomText}}</button>
     </up>
     <new-song-scroll
       slot="down"
@@ -54,10 +61,15 @@ export default {
       scrollX: true,
       scrollY: false,
       contentWidth: 0,
+      currentIndex: 0,
+      bottomText: "更多新歌",
     };
   },
   props: {
     newSong: {
+      type: Array,
+    },
+    tab: {
       type: Array,
     },
   },
@@ -99,6 +111,25 @@ export default {
       this.$emit("scrollRefresh");
       this.contentWidth = this.songOutItem.length * 300;
     },
+    //获取padding
+    getPadding(ind, tab) {
+      if (ind == 0) {
+        return ["padding_r"];
+      } else if (ind == tab.length - 1) {
+        return ["padding_l"];
+      } else {
+        return ["padding_r_l"];
+      }
+    },
+    //
+    changeType(ind) {
+      this.currentIndex = ind;
+      if (ind == 0) {
+        this.bottomText = "更多新歌";
+      } else {
+        this.bottomText = "更多新碟";
+      }
+    },
   },
   components: {
     TabRecommend,
@@ -124,6 +155,9 @@ export default {
 }
 .left {
   width: 50px;
+}
+.up-left {
+  display: flex;
 }
 .left img {
   width: 100%;
@@ -154,8 +188,19 @@ export default {
 }
 b {
   font-size: 15px;
+  color: #dddddd;
 }
 .new-song-scroll {
   width: 100%;
+}
+.padding_r {
+  padding-right: 10px;
+}
+.padding_l {
+  padding-left: 10px;
+  border-left: 1px solid #dddddd;
+}
+.black {
+  color: black;
 }
 </style>

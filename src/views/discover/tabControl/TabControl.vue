@@ -44,6 +44,7 @@ export default {
         {
           title: "电台",
           img: require("assets/img/discover/tabControl/radio_station.png"),
+          url:'/discover/dj'
         },
         {
           title: "直播",

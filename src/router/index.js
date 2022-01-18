@@ -7,6 +7,8 @@ const Cloud = () => import('views/cloud/Cloud')
 const Account = () => import('views/account/Account')
 const Playlist = () => import('views/discover/tabControl/playlist/Playlist')
 const Toplist = () => import('views/discover/tabControl/toplist/Toplist')
+const Dj = () => import('views/discover/tabControl/dj/Dj')
+const DjClassify = () => import('views/discover/tabControl/dj/childComponents/djClassify/DjClassify')
 
 
 Vue.use(VueRouter)
@@ -27,6 +29,17 @@ const routes = [
       {
         path: 'toplist',
         component: Toplist
+      },
+      {
+        path: 'dj',
+        component: Dj,
+        children: [
+          {
+            path: 'djclassify',
+            name:'djclassify',
+            component: DjClassify
+          }
+        ]
       }
     ]
   },

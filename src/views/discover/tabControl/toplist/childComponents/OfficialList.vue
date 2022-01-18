@@ -7,7 +7,7 @@
       <down slot="down" class="down">
         <toplist-item-one v-for="(item,index) in official" :key="index">
           <div class="img">
-            <img slot="img" :src="item.coverImgUrl" />
+            <img @load="load" slot="img" v-lazy="item.coverImgUrl" />
             <span class="updateFrequency">{{item.updateFrequency}}</span>
           </div>
           <div v-if="item.tracks.length > 0" class="tracks">
@@ -25,17 +25,27 @@ import Up from "components/content/tabRecommend/Up";
 import Down from "components/content/tabRecommend/Down";
 import ToplistItemOne from "components/content/tabRecommend/toplist/ToplistItemOne";
 
+import { debouce } from "common/utils";
 
 export default {
   name: "",
   data() {
     return {
+      timer : null
     };
   },
   props: {
     official: {
       type: Array,
     },
+  },
+  methods: {
+    load() {
+      this.timer = debouce(this.setLoading, 100, this.timer)
+    },
+    setLoading(){
+      this.$emit("setLoading");
+    }
   },
   computed: {
     getText() {

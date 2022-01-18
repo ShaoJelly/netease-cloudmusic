@@ -18,7 +18,7 @@
         <discover-swiper :banners="banners"></discover-swiper>
         <discover-tab-control></discover-tab-control>
         <discover-popular-playlist :popularPlaylist="popularPlaylist"></discover-popular-playlist>
-        <discover-new-song :new-song="newSong" @scrollRefresh="scrollRefresh"></discover-new-song>
+        <discover-new-song :tab="tab" :new-song="newSong" @scrollRefresh="scrollRefresh"></discover-new-song>
       </discover-scroll>
       <discover-search :hotDetail="hotDetail" ref="discoverSearch"></discover-search>
     </div>
@@ -51,6 +51,7 @@ export default {
       pullDownRefresh: true,
       isShow: false,
       loading: true,
+      tab:['新歌','新碟']
     };
   },
   components: {
